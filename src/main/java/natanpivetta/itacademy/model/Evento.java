@@ -1,23 +1,53 @@
 package natanpivetta.itacademy.model;
 
+import jakarta.persistence.*;
+import natanpivetta.itacademy.util.TipoEvento;
+
 import java.io.Serializable;
 
-public enum Evento {
-    PITCH_CONVINCENTE(6),
-    PRODUTO_COM_BUGS(-4),
-    BOA_TRACAO(3),
-    INVESTIDOR_IRRITADO(-6),
-    FAKE_NEWS(-8);
+@Entity
+@Table (name = "evento")
+public class Evento implements Serializable {
 
-    private Long startupID;
-    private Long batalhaID;
-    private final int impacto;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    Evento(int impacto) {
-        this.impacto = impacto;
+    @Enumerated(EnumType.STRING)
+    private TipoEvento tipo;
+
+    private int impacto;
+
+    @ManyToOne
+    @JoinColumn(name = "startup")
+    private Startup startup;
+
+    @ManyToOne
+    @JoinColumn(name = "batalha")
+    private Batalha batalha;
+
+    // Construtor padrão
+    public Evento() {}
+
+    // Construtor com tipo e startup
+    public Evento(TipoEvento tipo, Startup startup) {
+        this.tipo = tipo;
+        this.impacto = tipo.getImpacto(); // salva o impacto automaticamente
+        this.startup = startup;
     }
 
-    public int getImpacto() {
-        return impacto;
+    // Getters e setters
+    public Long getId() { return id; }
+    public TipoEvento getTipo() { return tipo; }
+    public int getImpacto() { return impacto; }
+    public Startup getStartup() { return startup; }
+
+    public void setTipo(TipoEvento tipo) {
+        this.tipo = tipo;
+        this.impacto = tipo.getImpacto();
+    }
+
+    public void setStartup(Startup startup) {
+        this.startup = startup;
     }
 }
