@@ -12,6 +12,7 @@
         <class>natanpivetta.itacademy.model.Batalha</class>
         <class>natanpivetta.itacademy.model.Evento</class>
         <class>natanpivetta.itacademy.model.Rodada</class>
+        <class>natanpivetta.itacademy.model.Torneio</class>
 
         <properties>
             <!-- Conexão com MySQL -->

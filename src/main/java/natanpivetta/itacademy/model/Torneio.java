@@ -1,35 +1,29 @@
 package natanpivetta.itacademy.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+@Entity
+@Table(name = "torneio")
 public class Torneio {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rodada> rodadas = new ArrayList<>();
-    private List<Rodada> rodadasPentendes = new ArrayList<>();
+    @OneToOne
     private Startup vencedora;
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Startup> startups = new ArrayList<>();
     private boolean status;
-
+    @Transient
+    int PONTUACAO_INICIAL = 70;
     public Torneio(){}
 
-    int PONTUACAO_INICIAL = 70;
-
-
-
-
-
-    public int numeroDeRodadas(){
-        if(startups.size()==8){
-            return 3;
-        }
-        if(startups.size()==4){
-            return 2;
-        }
-        return 0;
-    }
 
 
     public void iniciarTorneio(){
@@ -58,13 +52,13 @@ public class Torneio {
     }
     private void cadastrarStartups(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nome: \n");
+        System.out.println("Nome: ");
         String stNome = sc.next();
 
-        System.out.println("Slogan: \n");
+        System.out.println("Slogan: ");
         String stSlogan = sc.next();
 
-        System.out.println("Ano de fundação: \n");
+        System.out.println("Ano de fundação: ");
         int stAnoFundacao = sc.nextInt();
 
         Startup startup = new Startup(stNome, stSlogan, stAnoFundacao, PONTUACAO_INICIAL);
@@ -85,21 +79,19 @@ public class Torneio {
     }
 
 
-
-    public List<Rodada> getRodadasPendentes(){
-        if(rodadasPentendes.size()==0){
-            this.setStatusFinalizado();
-        }
-        for(Rodada rd : getRodadas()){
-            if(!rd.isFinalizada()){
-                this.rodadasPentendes.add(rd);
-            }
-        }
-
-        return this.rodadasPentendes;
+    public void setStatusFinalizado() {
+        this.status = true;
     }
 
-    private void setStatusFinalizado() {
-        this.status = true;
+    public Long getId(){
+        return this.id;
+    }
+
+    public void setVencedora(Startup vencedora) {
+        this.vencedora = vencedora;
+    }
+
+    public Startup getVencedora() {
+        return this.vencedora;
     }
 }
