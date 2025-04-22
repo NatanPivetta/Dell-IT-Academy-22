@@ -3,11 +3,11 @@ package natanpivetta.itacademy.model;
 import jakarta.persistence.*;
 import natanpivetta.itacademy.util.TipoEvento;
 
-import java.io.Serializable;
+
 
 @Entity
 @Table (name = "evento")
-public class Evento implements Serializable {
+public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,24 +30,21 @@ public class Evento implements Serializable {
     public Evento() {}
 
     // Construtor com tipo e startup
-    public Evento(TipoEvento tipo, Startup startup) {
+    public Evento(TipoEvento tipo, Startup startup, Batalha batalha) {
         this.tipo = tipo;
-        this.impacto = tipo.getImpacto(); // salva o impacto automaticamente
+        this.impacto = tipo.getImpacto();
         this.startup = startup;
+        this.batalha = batalha;
     }
 
-    // Getters e setters
+
     public Long getId() { return id; }
     public TipoEvento getTipo() { return tipo; }
     public int getImpacto() { return impacto; }
     public Startup getStartup() { return startup; }
-
-    public void setTipo(TipoEvento tipo) {
-        this.tipo = tipo;
-        this.impacto = tipo.getImpacto();
+    public Batalha getBatalha() { return batalha; }
+    public void setTipo(int i){
+        this.tipo = TipoEvento.values()[i];
     }
 
-    public void setStartup(Startup startup) {
-        this.startup = startup;
-    }
 }

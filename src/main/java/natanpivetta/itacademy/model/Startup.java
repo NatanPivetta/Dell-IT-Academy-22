@@ -40,12 +40,18 @@ public class Startup {
         return id;
     }
 
+    public int getPontuacao() {
+        return pontuacao;
+    }
 
-    public void setEstatisticas(int pitches, int bugs, int tracoes, int investidoresIrritados, int fakeNews) {
+
+    public void registraEvento(Evento evento) {
+        this.pontuacao += evento.getImpacto();
+        estatisticas.add(evento);
 
     }
 
-    public int getPontuacao() {
-        return pontuacao;
+    public String getNome() {
+        return nome;
     }
 }

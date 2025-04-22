@@ -11,6 +11,7 @@
         <class>natanpivetta.itacademy.model.Startup</class>
         <class>natanpivetta.itacademy.model.Batalha</class>
         <class>natanpivetta.itacademy.model.Evento</class>
+        <class>natanpivetta.itacademy.model.Rodada</class>
 
         <properties>
             <!-- Conexão com MySQL -->
@@ -18,7 +19,7 @@
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/itacademy?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>
             <property name="jakarta.persistence.jdbc.password" value="123456"/>
-            <property name="jakarta.persistence.schema-generation.database.action" value="update"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
     </persistence-unit>
 </persistence>
