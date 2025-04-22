@@ -54,4 +54,8 @@ public class Startup {
     public String getNome() {
         return nome;
     }
+
+    public void setPontosExtras() {
+        this.pontuacao += 30;
+    }
 }

@@ -102,7 +102,6 @@ public class BatalhaOptions {
                     verificaEvento(evento, stB);
                     break;
                 case 11:
-                    this.batalha.setVencedora();
                     this.batalha.setStatusFinalizada();
                     break;
             }

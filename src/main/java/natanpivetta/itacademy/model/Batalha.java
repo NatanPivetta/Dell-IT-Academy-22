@@ -14,12 +14,14 @@ public class Batalha {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @ManyToOne
     private Startup startupA;
-    @OneToOne
+    @ManyToOne
     private Startup startupB;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "vencedora_id")
     private Startup vencedora;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Rodada rodada;
     private boolean finalizada;
@@ -58,14 +60,19 @@ public class Batalha {
     }
 
     public void setVencedora() {
-        if(this.startupA.getPontuacao() > this.startupB.getPontuacao())
-        this.vencedora = startupA;
-        else if(this.startupB.getPontuacao() > this.startupA.getPontuacao()){
+        if (this.startupA.getPontuacao() > this.startupB.getPontuacao()) {
+            this.vencedora = startupA;
+        } else if (this.startupB.getPontuacao() > this.startupA.getPontuacao()) {
             this.vencedora = startupB;
-        }else{
+        } else {
             shark();
-            setVencedora();
+            if (this.startupA.getPontuacao() > this.startupB.getPontuacao()) {
+                this.vencedora = startupA;
+            } else {
+                this.vencedora = startupB;
+            }
         }
+        this.vencedora.setPontosExtras();
     }
 
     private void shark() {

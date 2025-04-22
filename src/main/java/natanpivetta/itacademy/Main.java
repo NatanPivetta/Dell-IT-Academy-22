@@ -46,7 +46,7 @@ public class Main {
         }
         torneio.setRodadas(rodada);
         RodadaOptions rdOptions = new RodadaOptions(rodada);
-        rodada.iniciarRodada(rodada, rdOptions, sc, btRepository); // iniciando rodada 1 fora do loop
+        rodada.iniciarRodada(rodada, rdOptions, sc, btRepository, rdRepository); // iniciando rodada 1 fora do loop
         rdRepository.save(rodada);
 
         List<Startup> vencedoras = rodada.getVencedorasRodada(rodada);
@@ -57,6 +57,7 @@ public class Main {
             numeroRodada++;
 
             rodada = rodada.criarNovaRodada(vencedoras, numeroRodada);
+            rdRepository.save(rodada);
             batalhasList = rodada.sortearBatalhas(vencedoras, rodada);
             for (Batalha bt : batalhasList) {
                 btRepository.save(bt);
@@ -64,8 +65,8 @@ public class Main {
             }
             torneio.setRodadas(rodada);
             rdOptions = new RodadaOptions(rodada);
-            rodada.iniciarRodada(rodada, rdOptions, sc, btRepository);
-            // rdRepository.save(rodada);
+            rodada.iniciarRodada(rodada, rdOptions, sc, btRepository, rdRepository);
+
 
             vencedoras = rodada.getVencedorasRodada(rodada);
         }

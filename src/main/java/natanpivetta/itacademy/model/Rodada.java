@@ -2,6 +2,7 @@ package natanpivetta.itacademy.model;
 
 import jakarta.persistence.*;
 import natanpivetta.itacademy.repository.BatalhaRepository;
+import natanpivetta.itacademy.repository.RodadaRepository;
 import natanpivetta.itacademy.util.BatalhaOptions;
 import natanpivetta.itacademy.util.RodadaOptions;
 
@@ -83,7 +84,7 @@ public class Rodada {
         return rodada;
     }
 
-    public void iniciarRodada(Rodada rodada, RodadaOptions rdOptions, Scanner sc, BatalhaRepository btRepository) {
+    public void iniciarRodada(Rodada rodada, RodadaOptions rdOptions, Scanner sc, BatalhaRepository btRepository, RodadaRepository rdRepository) {
         while (!rodada.isFinalizada()) {
             rdOptions.gerarOpcoes();
             int op = sc.nextInt();
@@ -98,8 +99,13 @@ public class Rodada {
                 op = sc.nextInt();
                 btOptions.lerOpcao(op);
             }
+            bt.setVencedora();
+            System.out.println("Vencedora: " + (bt.getVencedora() != null ? bt.getVencedora().getNome() : "NENHUMA"));
+            bt.setStatusFinalizada();
+            btRepository.update(bt);
             if(this.getBatalhasPendentes().isEmpty()){
                 setStatusFinalizada();
+                rdRepository.update(this);
             }
         }
     }

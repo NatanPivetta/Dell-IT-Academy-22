@@ -14,7 +14,7 @@ public class RodadaOptions {
     public void gerarOpcoes(){
         int contador = 1;
 
-        if(rodada.getBatalhasPendentes().size() == 0){
+        if(rodada.getBatalhasPendentes().isEmpty()){
             rodada.setStatusFinalizada();
         }else{
             System.out.println("Selecione a batalha pendente para administrar: ");
