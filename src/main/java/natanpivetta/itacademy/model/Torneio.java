@@ -3,6 +3,7 @@ package natanpivetta.itacademy.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -116,9 +117,12 @@ public class Torneio {
     public List<String> getEstatisticas() {
         List<String> estatisticas = new ArrayList<>();
 
+        startups.sort(Comparator.comparingInt(Startup::getPontuacao).reversed());
+
         estatisticas.add(String.format(
-                "%-30s | %6s | %6s | %6s | %6s | %6s | %6s |",
+                "%-30s | %6s | %6s | %6s | %6s | %6s | %6s | %6s |",
                 "Startup",
+                "Pontuação",
                 "Pitches",
                 "Bugs",
                 "Boa Tração",
@@ -160,8 +164,9 @@ public class Torneio {
             }
 
             String linha = String.format(
-                    "%-30s | %6d | %6d | %6d | %6d | %6d | %6d |",
+                    "%-30s | %6d | %6d | %6d | %6d | %6d | %6d | %6d |",
                     startup.getNome(),
+                    startup.getPontuacao(),
                     pitches,
                     bugs,
                     boaTracao,
