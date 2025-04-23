@@ -105,4 +105,67 @@ public class Torneio {
     public Startup getVencedora() {
         return this.vencedora;
     }
+
+    public List<String> getEstatisticas() {
+        List<String> estatisticas = new ArrayList<>();
+
+        estatisticas.add(String.format(
+                "%-30s | %6s | %6s | %6s | %6s | %6s | %6s |",
+                "Startup",
+                "Pitches",
+                "Bugs",
+                "Boa Tração",
+                "Investidor Irritado",
+                "Fake News",
+                "Shark Fights"
+        ));
+        for (Startup startup : startups) {
+            int pitches = 0;
+            int bugs = 0;
+            int boaTracao = 0;
+            int investidorIrritado = 0;
+            int fakeNews = 0;
+            int shark = 0;
+
+            for (Evento ev : startup.getEstatisticas()) {
+                String tipo = ev.getTipo().name();
+
+                switch (tipo) {
+                    case "PITCH_CONVINCENTE":
+                        pitches++;
+                        break;
+                    case "PRODUTO_COM_BUGS":
+                        bugs++;
+                        break;
+                    case "BOA_TRACAO":
+                        boaTracao++;
+                        break;
+                    case "INVESTIDOR_IRRITADO":
+                        investidorIrritado++;
+                        break;
+                    case "FAKE_NEWS":
+                        fakeNews++;
+                        break;
+                    case "SHARK":
+                        shark++;
+                        break;
+                }
+            }
+
+            String linha = String.format(
+                    "%-30s | %6d | %6d | %6d | %6d | %6d | %6d |",
+                    startup.getNome(),
+                    pitches,
+                    bugs,
+                    boaTracao,
+                    investidorIrritado,
+                    fakeNews,
+                    shark
+            );
+
+            estatisticas.add(linha);
+        }
+
+        return estatisticas;
+    }
 }

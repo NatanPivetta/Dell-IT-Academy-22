@@ -98,7 +98,9 @@ public class Main {
     private static void finalizarTorneio() {
         torneio.setStatusFinalizado();
         trRepository.save(torneio);
-        System.out.println("Startup Vencedora: " + torneio.getVencedora().getNome());
+        Startup vencedora = torneio.getVencedora();
+        System.out.println("Startup Vencedora: " + vencedora.getNome() + " - " + vencedora.getSlogan());
+        exibeEstatisticas();
     }
 
     private static void exibirMenuPrincipal() {
@@ -150,5 +152,11 @@ public class Main {
 
     }
 
+    private static void exibeEstatisticas(){
+        System.out.println("Estatísticas do torneio: ");
+        for(String linha: torneio.getEstatisticas()){
+            System.out.println(linha);
+        }
+    }
 
 }

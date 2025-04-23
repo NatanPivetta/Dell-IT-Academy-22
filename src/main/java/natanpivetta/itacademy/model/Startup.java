@@ -73,4 +73,8 @@ public class Startup {
     public Long getTorneioId() {
         return this.torneioId;
     }
+
+    public List<Evento> getEstatisticas() {
+        return estatisticas;
+    }
 }

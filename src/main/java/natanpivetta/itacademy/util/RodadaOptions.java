@@ -28,4 +28,6 @@ public class RodadaOptions {
     public Batalha lerOpcao(int i){
         return this.rodada.getBatalhasPendentes().get(i-1);
     }
+
+
 }
