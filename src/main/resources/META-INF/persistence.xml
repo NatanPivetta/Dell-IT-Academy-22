@@ -7,7 +7,7 @@
     <persistence-unit name="StartupRushPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- Substitua com suas classes de entidade -->
+
         <class>natanpivetta.itacademy.model.Startup</class>
         <class>natanpivetta.itacademy.model.Batalha</class>
         <class>natanpivetta.itacademy.model.Evento</class>
