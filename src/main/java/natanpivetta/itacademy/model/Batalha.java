@@ -86,15 +86,16 @@ public class Batalha {
         EventoRepository evRepository = new EventoRepository();
         double rA = Math.random();
         double rB = Math.random();
-        System.out.println(rA + "  -  " + rB);
         if(rA > rB){
             evento = new Evento(TipoEvento.SHARK, this.startupA, this);
             this.startupA.registraEvento(evento);
             evRepository.registraEvento(evento);
+            System.out.println(this.startupA.getNome() + " venceu a Shark Fight");
         }else if(rB > rA){
             evento = new Evento(TipoEvento.SHARK, this.startupB, this);
             this.startupB.registraEvento(evento);
             evRepository.registraEvento(evento);
+            System.out.println(this.startupB.getNome() + " venceu a Shark Fight");
         }else{
             shark();
         }
