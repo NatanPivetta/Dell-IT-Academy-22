@@ -53,6 +53,7 @@ public class BatalhaOptions {
     }
 
     public void imprimirOpcoes() {
+        placarAtual();
         for (String opcao : opcoes) {
             System.out.println(opcao);
         }
@@ -121,6 +122,14 @@ public class BatalhaOptions {
         if(this.contadorEv == 10){
             this.batalha.setStatusFinalizada();
         }
+    }
+
+    public void placarAtual(){
+        String s = "\n Placar: ";
+        Startup stA = this.batalha.getStartupA();
+        Startup stB = this.batalha.getStartupB();
+        s += stA.getNome() + " - " + stA.getPontuacao() + " pontos VS " + stB.getNome() + " - " + stB.getPontuacao() + " pontos \n";
+        System.out.println(s);
     }
 
 

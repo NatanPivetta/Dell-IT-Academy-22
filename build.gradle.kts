@@ -19,10 +19,15 @@ dependencies {
     implementation("org.hibernate.orm:hibernate-core:6.3.1.Final")
 
     // MySQL Driver
-    implementation("com.mysql:mysql-connector-j:8.0.33")
+    implementation("com.mysql:mysql-connector-j:8.2.0")
 
 }
 
 tasks.test {
     useJUnitPlatform()
 }
+
+tasks.withType<JavaExec> {
+    jvmArgs = listOf("-Djava.util.logging.config.file=src/main/resources/logging.properties")
+}
+

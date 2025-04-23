@@ -18,6 +18,8 @@ public class Startup {
     private String slogan;
     private int anoFundacao;
     private int pontuacao;
+    @Transient
+    private Long torneioId;
 
     @OneToMany(mappedBy = "startup", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Evento> estatisticas = new ArrayList<>();
@@ -32,9 +34,6 @@ public class Startup {
     }
 
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getId() {
         return id;
@@ -57,5 +56,21 @@ public class Startup {
 
     public void setPontosExtras() {
         this.pontuacao += 30;
+    }
+
+    public String getSlogan() {
+        return this.slogan;
+    }
+
+    public String getAnoFundacao() {
+        return String.valueOf(anoFundacao);
+    }
+
+    public void setTorneioId(Long id) {
+        this.torneioId = id;
+    }
+
+    public Long getTorneioId() {
+        return this.torneioId;
     }
 }

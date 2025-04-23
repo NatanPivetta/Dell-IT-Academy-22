@@ -53,13 +53,24 @@ public class Torneio {
     private void cadastrarStartups(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Nome: ");
-        String stNome = sc.next();
+        String stNome = sc.nextLine();
 
         System.out.println("Slogan: ");
-        String stSlogan = sc.next();
+        String stSlogan = sc.nextLine();
 
-        System.out.println("Ano de fundação: ");
-        int stAnoFundacao = sc.nextInt();
+        int stAnoFundacao = 0;
+        boolean entradaValida = false;
+
+        while (!entradaValida) {
+            System.out.println("Ano de fundação:");
+            String input = sc.nextLine();
+            try {
+                stAnoFundacao = Integer.parseInt(input);
+                entradaValida = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida! Por favor, digite um número inteiro para o ano.");
+            }
+        }
 
         Startup startup = new Startup(stNome, stSlogan, stAnoFundacao, PONTUACAO_INICIAL);
         startups.add(startup);

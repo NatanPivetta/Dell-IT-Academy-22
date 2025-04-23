@@ -1,7 +1,6 @@
 package natanpivetta.itacademy.repository;
 
 import jakarta.persistence.EntityManager;
-import natanpivetta.itacademy.model.Batalha;
 import natanpivetta.itacademy.model.Torneio;
 import natanpivetta.itacademy.util.JPAUtil;
 

@@ -97,6 +97,7 @@ public class Rodada {
                 bt.confronto();
                 btOptions.imprimirOpcoes();
                 op = sc.nextInt();
+                sc.nextLine();
                 btOptions.lerOpcao(op);
             }
             bt.setVencedora();

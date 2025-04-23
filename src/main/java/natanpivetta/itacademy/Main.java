@@ -28,10 +28,7 @@ public class Main {
     public static void main(String[] args) {
         sc = new Scanner(System.in);
         inicializarRepositorios();
-        inicializarTorneio();
-        executarRodadaInicial();
-        executarRodadasFinais();
-        finalizarTorneio();
+        exibirMenuPrincipal();
     }
 
     private static void inicializarRepositorios() {
@@ -52,6 +49,7 @@ public class Main {
     private static void executarRodadaInicial() {
         Rodada rodada = new Rodada();
         rodada.setStartups(torneio.getStartups());
+        rodada.setNumero(1);
 
         List<Startup> startupsRodada = new ArrayList<>(rodada.getStartups());
         carregarBatalhas(startupsRodada, rodada);
@@ -90,10 +88,66 @@ public class Main {
         novaRodada.iniciarRodada(novaRodada, rdOptions, sc, btRepository, rdRepository);
     }
 
+    private static void executarTorneioCompleto() {
+        inicializarTorneio();
+        executarRodadaInicial();
+        executarRodadasFinais();
+        finalizarTorneio();
+    }
+
     private static void finalizarTorneio() {
         torneio.setStatusFinalizado();
         trRepository.save(torneio);
         System.out.println("Startup Vencedora: " + torneio.getVencedora().getNome());
+    }
+
+    private static void exibirMenuPrincipal() {
+        int opcao = -1;
+
+        while (opcao != 3) {
+            System.out.println("\n==== MENU PRINCIPAL ====");
+            System.out.println("1 - Iniciar Novo Torneio");
+            System.out.println("2 - Visualizar Hall da Fama");
+            System.out.println("3 - Sair");
+            System.out.print("Escolha uma opção: ");
+
+            try {
+                opcao = Integer.parseInt(sc.nextLine());
+
+                switch (opcao) {
+                    case 1:
+                        executarTorneioCompleto();
+                        break;
+                    case 2:
+                        exibirHallDaFama();
+                        break;
+                    case 3:
+                        System.out.println("Saindo da aplicação. Até mais!");
+                        break;
+                    default:
+                        System.out.println("Opção inválida. Tente novamente.");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Digite um número.");
+            }
+        }
+    }
+
+    private static void exibirHallDaFama() {
+        List<Torneio> torneios;
+        List<Startup> hallDaFama = new ArrayList<>();
+        torneios = trRepository.findAll();
+        for(Torneio t : torneios) {
+            Startup vencedora = t.getVencedora();
+            vencedora.setTorneioId(t.getId());
+            hallDaFama.add(vencedora);
+        }
+        System.out.println("\n==== HALL DA FAMA ====");
+        for(Startup s : hallDaFama) {
+            System.out.println(s.getNome() + " - " + s.getSlogan() + " - Fundada em " + s.getAnoFundacao() + " Vencedora do torneio " + s.getTorneioId() );
+        }
+
     }
 
 
