@@ -11,22 +11,28 @@ import java.util.List;
 @Entity
 @Table (name = "batalha")
 public class Batalha {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     private Startup startupA;
+
     @ManyToOne
     private Startup startupB;
+
     @ManyToOne
     @JoinColumn(name = "vencedora_id")
     private Startup vencedora;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Rodada rodada;
-    private boolean finalizada;
+
     @OneToMany(mappedBy = "batalha", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Evento> eventos = new ArrayList<>();
+
+    private boolean finalizada;
 
 
     public Batalha() {}
@@ -110,10 +116,5 @@ public class Batalha {
     public Startup getVencedora() {
         return vencedora;
     }
-
-    public List<Evento> getEventos(){
-        return eventos;
-    }
-
 
 }

@@ -13,15 +13,22 @@ public class Torneio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rodada> rodadas = new ArrayList<>();
+
     @OneToOne
     private Startup vencedora;
+
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Startup> startups = new ArrayList<>();
-    private boolean status;
+
     @Transient
     int PONTUACAO_INICIAL = 70;
+
+    private boolean status;
+
+
     public Torneio(){}
 
 

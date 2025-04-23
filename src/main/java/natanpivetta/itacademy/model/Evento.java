@@ -26,10 +26,10 @@ public class Evento {
     @JoinColumn(name = "batalha")
     private Batalha batalha;
 
-    // Construtor padrão
     public Evento() {}
 
-    // Construtor com tipo e startup
+
+
     public Evento(TipoEvento tipo, Startup startup, Batalha batalha) {
         this.tipo = tipo;
         this.impacto = tipo.getImpacto();
@@ -37,14 +37,10 @@ public class Evento {
         this.batalha = batalha;
     }
 
-
-    public Long getId() { return id; }
+    public Long getId() {return id;}
     public TipoEvento getTipo() { return tipo; }
     public int getImpacto() { return impacto; }
     public Startup getStartup() { return startup; }
-    public Batalha getBatalha() { return batalha; }
-    public void setTipo(int i){
-        this.tipo = TipoEvento.values()[i];
-    }
+
 
 }

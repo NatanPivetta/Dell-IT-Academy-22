@@ -14,21 +14,26 @@ import java.util.Scanner;
 @Entity
 @Table(name = "rodada")
 public class Rodada {
+
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int numero;
     @OneToMany
     List<Batalha> batalhaList = new ArrayList<Batalha>();
-    private boolean status;
+
     @ManyToMany
     private List<Startup> startupsList = new ArrayList<>();
 
+    private boolean status;
+    private int numero;
+
+
     public Rodada() {}
 
-    public void setStatusIniciada(){
-        status = false;
+
+    public Long getId() {
+        return id;
     }
 
     public void setStatusFinalizada(){
@@ -51,20 +56,13 @@ public class Rodada {
         return numero;
     }
 
-
     public List<Batalha> getBatalhas() {
         return this.batalhaList;
     }
 
-    public Long getID() {
-        return this.id;
-    }
-
-
     public void setNumero(int numero) {
         this.numero = numero;
     }
-
 
     public List<Batalha> getBatalhasPendentes(){
         List<Batalha> btPendentes = new ArrayList<>();

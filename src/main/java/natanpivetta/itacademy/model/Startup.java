@@ -14,10 +14,12 @@ public class Startup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
     private String slogan;
     private int anoFundacao;
     private int pontuacao;
+
     @Transient
     private Long torneioId;
 
